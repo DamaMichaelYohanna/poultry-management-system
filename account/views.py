@@ -1,6 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
+from account.forms import UserForm, ProfileForm
+from account.models import Profile
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -25,8 +28,12 @@ def add_user(request):
         profile_form = ProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-        else
-        pass
+            profile_form.save(commit=False)
+            profile_form.user = user
+            profile_form.save()
+        else:
+            error = True
+            pass
     else:
         pass
     context = {}
