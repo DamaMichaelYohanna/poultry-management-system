@@ -7,6 +7,35 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="container-fluid"></div>
+    <div class="container-fluid">
+      <div
+        class="login-center"
+        style="box-shadow: 0px opx 4px grey; margin: auto; width: 40%"
+      >
+        <h3
+          style="
+            background: greenyellow;
+            padding: 1%;
+            text-align: center;
+            width: 100%;
+          "
+        >
+          Login In
+        </h3>
+        <div>
+          <form action="." method="POST">
+            <p>
+              <input type="text" name="username" id="username" />
+            </p>
+            <p>
+              <input type="password" name="password" id="password" />
+            </p>
+            <button>login</button>
+          </form>
+        </div>
+        <p>Forgot password?</p>
+        <a href="/account/password/recover">Recover</a>
+      </div>
+    </div>
   </body>
 </html>
