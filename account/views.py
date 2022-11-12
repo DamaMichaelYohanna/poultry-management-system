@@ -9,10 +9,13 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get("username")
         password = request.POST.get("password")
-        user = authenticate(username, password)
+        user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-        return redirect('/')
+            return redirect('/')
+        else:
+            error = True
+            return render(request, "login.html", {'status': error})
     else:
         return render(request, "login.html")
 
