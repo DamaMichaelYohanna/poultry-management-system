@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from account.forms import UserForm, ProfileForm
@@ -25,6 +26,7 @@ def logout_view(request):
     return redirect('/')
 
 
+@login_required
 def add_user(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
