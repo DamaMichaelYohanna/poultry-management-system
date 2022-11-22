@@ -54,9 +54,27 @@ def add_user(request):
     return render(request, 'add_user.html', context=context)
 
 
+@login_required
+def update_profile(request):
+    if request.method == "POST":
+        pass
+    else:
+        return render(request, 'update_profile.html')
+
+
+@login_required
+def delete_profile(request, pk):
+    info = Profile.objects.get(pk=pk)
+    
+
+    return None
+
+
 def change_password(request):
     pass
 
 
 def recover_password(request):
     pass
+
+

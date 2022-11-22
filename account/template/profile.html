@@ -1,12 +1,12 @@
-{% extends 'base.html' %} {% block tittle %}PMS | Profile View {% endblock %}
-{%block content %}
+{% extends 'base.html' %} {% load static %} {% block tittle %}PMS | Profile View
+{% endblock %} {%block content %}
 <div class="pt-5 ps-5 pe-5">
   <div class="row pb-5">
     <div class="col-md-4 ps-5 pe-5">
       <img
         src="{{ user_profile.image.url }}"
         alt=""
-        style="height: 100%; width: 100%; border-radius: 40px"
+        style="height: 100%; width: 100%; border-radius: 10px"
       />
     </div>
     <div class="col-md-6">
@@ -28,7 +28,16 @@
         </tr>
       </table>
     </div>
-    <div class="col-md-4"></div>
+    <div class="col-md-2">
+      <a href="" class="btn" style="background-color: wheat; width: 100%"
+        >Update Profile</a
+      >
+      <br />
+      <hr />
+      <a href="" class="btn" style="background-color: wheat; width: 100%"
+        >Add New staff</a
+      >
+    </div>
   </div>
   <h4 style="text-align: center">Other staff</h4>
   <hr />
@@ -41,15 +50,34 @@
         <th>Contact</th>
         <th>Position</th>
         <th class="d-none d-md-block">Address</th>
+        <th>More</th>
       </tr>
       {% for info in all_users %}
       <tr>
         <td>{{forloop.counter}}</td>
-        <td>{{info.user.get_full_name}}</td>
+        <td>{{info.user.get_full_name|truncatewords:2}}</td>
         <td class="d-none d-md-block">{{info.user.email}}</td>
         <td>{{info.contact}}</td>
         <td>{{info.position}}</td>
         <td class="d-none d-md-block">{{info.address|truncatewords:3}}</td>
+        <td>
+          <a href="delete/{{info.pk}}">
+            <img
+              src="{% static 'delete.png' %}"
+              alt="del"
+              height="20"
+              width="20"
+            />
+          </a>
+          <a href="update/{{info.pk}}">
+            <img
+              src="{% static 'update.png' %}"
+              alt="updt"
+              height="20"
+              width="20"
+            />
+          </a>
+        </td>
       </tr>
       {% endfor %}
     </table>
