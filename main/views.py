@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 def index(request):
-    total_user = U
+    # total_user = U
     return render(request, "index.html")
 
 
