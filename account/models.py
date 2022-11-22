@@ -6,7 +6,7 @@ user = get_user_model()
 
 class Profile(models.Model):
     """model for user's profile """
-    user = models.ForeignKey(user, on_delete=models.CASCADE, )
+    user = models.ForeignKey(user, related_name="profile", on_delete=models.CASCADE, )
     position = models.CharField(max_length=20)
     contact = models.CharField(max_length=12)
     address = models.CharField(max_length=100)

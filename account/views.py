@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
+from django.contrib.auth.models import User
 
 from account.forms import UserForm, ProfileForm
 from account.models import Profile
@@ -65,9 +66,16 @@ def update_profile(request):
 @login_required
 def delete_profile(request, pk):
     info = Profile.objects.get(pk=pk)
-    
+    acc = User.objects.get(profile=info)
+    if request.user.is_superuser:
+        # del info
+        # del acc
+        pass
 
-    return None
+    else:
+        pass
+
+    return redirect(reverse('account:profile'))
 
 
 def change_password(request):
