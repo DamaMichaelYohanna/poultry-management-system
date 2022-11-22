@@ -1,2 +1,58 @@
-{% extends 'base.html' %} {% block tittle %} {% endblock %} {% block content %}
+{% extends 'base.html' %} {% block tittle %}PMS | Profile View {% endblock %}
+{%block content %}
+<div class="pt-5 ps-5 pe-5">
+  <div class="row pb-5">
+    <div class="col-md-4 ps-5 pe-5">
+      <img
+        src="{{ user_profile.image.url }}"
+        alt=""
+        style="height: 100%; width: 100%; border-radius: 40px"
+      />
+    </div>
+    <div class="col-md-6">
+      <h3>{{user.get_full_name}}</h3>
+      <p>
+        Role/Position:
+        <span style="font-weight: bold">{{user_profile.position}}</span>
+      </p>
+      <table class="table">
+        <tr>
+          <th>Email</th>
+          <th>Contact</th>
+          <th>Address</th>
+        </tr>
+        <tr>
+          <td>{{user_profile.user.email}}</td>
+          <td>{{user_profile.contact}}</td>
+          <td>{{user_profile.address}}</td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <h4 style="text-align: center">Other staff</h4>
+  <hr />
+  <div>
+    <table class="table">
+      <tr>
+        <th>S/N</th>
+        <th>Full name</th>
+        <th class="d-none d-md-block">Email</th>
+        <th>Contact</th>
+        <th>Position</th>
+        <th class="d-none d-md-block">Address</th>
+      </tr>
+      {% for info in all_users %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{info.user.get_full_name}}</td>
+        <td class="d-none d-md-block">{{info.user.email}}</td>
+        <td>{{info.contact}}</td>
+        <td>{{info.position}}</td>
+        <td class="d-none d-md-block">{{info.address|truncatewords:3}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
 {% endblock%}

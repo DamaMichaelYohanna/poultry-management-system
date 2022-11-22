@@ -27,6 +27,15 @@ def logout_view(request):
 
 
 @login_required
+def profile(request):
+    user_profile = Profile.objects.get(user=request.user.id)
+    all_profile = Profile.objects.all()
+    print(user_profile)
+    context = {'user_profile': user_profile, "all_users": all_profile}
+    return render(request, 'profile.html', context)
+
+
+@login_required
 def add_user(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)

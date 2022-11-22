@@ -88,17 +88,47 @@
                 </ul>
               </li>
             </ul>
-            <form>
+            <!-- profile picture in nav -->
+            <span class="nav-item dropdown" style="padding: 0px 5%">
+              <a
+                class="nav-link dropdown-toggle"
+                href="/account/profile"
+                id="dropdown09"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                ><img
+                  style="border-radius: 100%"
+                  src="{{ user_profile.image.url }}"
+                  alt="Bootstrap"
+                  width="30"
+                  height="24"
+              /></a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown09">
+                <li>
+                  <a class="dropdown-item" href="/account/change_password"
+                    >Change Password</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/account/logout"
+                    >Logout Session</a
+                  >
+                </li>
+              </ul>
+            </span>
+            <!-- <form>
               <input
                 class="form-control"
                 type="text"
                 placeholder="Search"
                 aria-label="Search"
               />
-            </form>
+            </form> -->
           </div>
         </div>
       </nav>
     </section>
+    <!-- main body section | to be filled by other template -->
+    <section>{% block content %} {% endblock %}</section>
   </body>
 </html>
