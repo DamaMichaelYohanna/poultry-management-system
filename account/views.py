@@ -72,9 +72,6 @@ def delete_profile(request, pk):
         # del acc
         pass
 
-    else:
-        pass
-
     return redirect(reverse('account:profile'))
 
 
