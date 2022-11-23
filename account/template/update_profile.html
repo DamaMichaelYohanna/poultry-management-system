@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %} {% load static %} {% block tittle %}PMS | Profile
+Update {% endblock %} {%block content %}
+<div class="pt-5">
+  <div class="row">
+    <div class="col-md-6 ps-5" style="text-align: center">
+      <h2>Update Staff Information</h2>
+      <hr />
+      <img src="{% static 'updt.png' %}" alt="" />
+      <hr />
+    </div>
+    <div class="col-md-4 col-sm-10 ms-2" style="text-align: center">
+      <form
+        action=""
+        method="POST"
+        enctype="multipart/form-data"
+        class="form"
+        style="box-shadow: 0px 0px 5px grey"
+      >
+        <table class="table">
+          {{user.as_table}} {{profile.as_table}}
+        </table>
+        {% csrf_token%}
+        <button class="btn btn-dark">Update</button>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+{% endblock %}
