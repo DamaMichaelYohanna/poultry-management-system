@@ -56,11 +56,22 @@ def add_user(request):
 
 
 @login_required
-def update_profile(request):
+def update_profile(request, pk):
+    info = Profile.objects.get(pk=pk)
+    acc = User.objects.get(profile=info)
     if request.method == "POST":
-        pass
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            profile_form.save(commit=False)
+            profile_form.user = user
+            profile_form.save()
     else:
-        return render(request, 'update_profile.html')
+        user_form = UserForm(instance=acc)
+        profile_form = ProfileForm(instance=info)
+    context = {'user': user_form, 'profile': profile_form}
+    return render(request, 'update_profile.html', context)
 
 
 @login_required
