@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% load static %} {% block tittle %}PMS | Profile
+Update {% endblock %} {%block content %}
+<div class="container-fluid pt-5">
+  <h2>Farm Information</h2>
+  <hr />
+  <div class="row">
+    <div class="col-md-4">
+      <img
+        src="{% static 'pic.png' %}"
+        height="200px"
+        width="400px"
+        alt="No picture"
+      />
+    </div>
+    <div class="col-md-8">
+      <table class="table">
+        <tr>
+          <th>Name</th>
+          <th>Reg No</th>
+        </tr>
+        <tr>
+          <td>{{farm.name}}</td>
+          <td>{{farm.reg_no}}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <th>Contact</th>
+        </tr>
+        <tr>
+          <td>{{farm.email}}</td>
+          <td>{{farm.contact}}</td>
+        </tr>
+        <tr>
+          <th>Physical Address</th>
+          <th>LGA & State</th>
+        </tr>
+        <tr>
+          <td>{{farm.email}}</td>
+          <td>{{farm.contact}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock%}
