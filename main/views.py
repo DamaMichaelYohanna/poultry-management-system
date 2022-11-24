@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Farm
 
 
 def index(request):
@@ -11,7 +12,8 @@ def store(request):
 
 
 def farm_detail(request):
-    return render(request, 'farm.html')
+    detail = Farm.objects.get(id=1)
+    return render(request, 'farm.html', {'farm': detail})
 
 
 def sell_product(request):
