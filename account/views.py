@@ -40,18 +40,17 @@ def profile(request):
 def add_user(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        profile_form = ProfileForm(request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             profile_form.save(commit=False)
             profile_form.user = user
             profile_form.save()
-        else:
-            error = True
-            pass
+
     else:
-        pass
-    context = {}
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST, request.FILES)
+    context = {'user': user_form, 'profile': profile_form}
     return render(request, 'add_user.html', context=context)
 
 
@@ -60,13 +59,13 @@ def update_profile(request, pk):
     info = Profile.objects.get(pk=pk)
     acc = User.objects.get(profile=info)
     if request.method == "POST":
-        user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST)
+        user_form = UserForm(request.POST, instance=acc)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=info)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
-            profile_form.save(commit=False)
-            profile_form.user = user
+            # profile_form.save(commit=False)
             profile_form.save()
+            return redirect(reverse("account:profile"))
     else:
         user_form = UserForm(instance=acc)
         profile_form = ProfileForm(instance=info)
