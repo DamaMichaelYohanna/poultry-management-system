@@ -9,7 +9,7 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name', 'email')
+        fields = ('first_name', 'last_name', 'email', 'username')
 
 
 class ProfileForm(forms.ModelForm):
@@ -17,4 +17,4 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ("user",)
+        exclude = ("user", 'date')
