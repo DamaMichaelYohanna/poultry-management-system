@@ -19,13 +19,19 @@ class Item(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Store(models.Model):
     """model for store item"""
     date = models.DateTimeField(auto_now_add=True)
-    item = models.ForiegnKey(Item)
-    quantity = models.PositiveInterger()
-    rate = models.PositiveInterger()
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    rate = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f'{self.item.name}'
 
     def total(self):
         return self.quantity * self.rate
