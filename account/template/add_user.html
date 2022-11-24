@@ -1,0 +1,205 @@
+{% extends 'base.html' %} {% block tittle %} {% endblock %} {% block content %}
+<div>
+  <div class="row pt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <form action="" method="POST">
+        <!-- <div class="input-group">
+          <span class="input-group-text">Date</span>
+          <input
+            class="form-control"
+            type="text"
+            name="first_name"
+            maxlength="150"
+            id="id_first_name"
+          />
+        </div> -->
+        <div class="row">
+          <div class="col-md-3">
+            <label for="id_username" class="">Username:</label>
+          </div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <i
+                class="fa-duotone fa-user input-group-text"
+                style="color: white; background: rgb(219, 189, 133)"
+              ></i>
+              <input
+                class="form-control"
+                type="text"
+                name="username"
+                maxlength="150"
+                required
+                id="id_username"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-md-3">
+            <label for="id_first_name" class="">First name:</label>
+          </div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <i
+                class="fa-duotone fa-camera-retro input-group-text"
+                style="color: #1c7ed6"
+              ></i>
+              <input
+                class="form-control"
+                type="text"
+                name="first_name"
+                maxlength="150"
+                id="id_first_name"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row pt-3">
+          <div class="col-md-3">
+            <label for="id_last_name" class="">Last name:</label>
+          </div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <i
+                class="fa-duotone fa-camera-retro input-group-text"
+                style="color: #1c7ed6"
+              ></i>
+              <input
+                class="form-control"
+                type="text"
+                name="last_name"
+                maxlength="150"
+                id="id_last_name"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row pt-3">
+          <div class="col-md-3">
+            <label for="id_email" class="">Email addrs</label>
+          </div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <i
+                class="fa-duotone fa-camera-retro input-group-text"
+                style="color: #1c7ed6"
+              ></i>
+              <input
+                class="form-control"
+                type="email"
+                name="email"
+                maxlength="254"
+                id="id_email"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-md-3"><label for="id_username">Username:</label></div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <i
+                class="fa-duotone fa-camera-retro input-group-text"
+                style="color: #1c7ed6"
+              ></i>
+              <input
+                class="form-control"
+                type="text"
+                name="username"
+                maxlength="150"
+                required
+                id="id_username"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-md-3"><label for="id_position">Position:</label></div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <i
+                class="fa-duotone fa-camera-retro input-group-text"
+                style="color: #1c7ed6"
+              ></i>
+              <input
+                class="form-control"
+                type="text"
+                name="position"
+                maxlength="20"
+                required
+                id="id_position"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-md-3"><label for="id_contact">Contact:</label></div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <i
+                class="fa-duotone fa-camera-retro input-group-text"
+                style="color: #1c7ed6"
+              ></i>
+              <input
+                class="form-control"
+                type="text"
+                name="contact"
+                maxlength="12"
+                required
+                id="id_contact"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-md-3">
+            <label class="pt-2 pb-2" for="id_address">Address:</label>
+          </div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <i
+                class="fa-duotone fa-camera-retro input-group-text"
+                style="color: #1c7ed6"
+              ></i>
+              <input
+                class="form-control"
+                type="text"
+                name="address"
+                maxlength="100"
+                required
+                id="id_address"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row pt-3">
+          <div class="col-3">
+            <label for="id_image" class="pt-2 pb-2">Image:</label>
+          </div>
+          <div class="col-md-9">
+            <div class="input-group">
+              <!-- <i
+                class="fa-duotone fa-camera-retro input-group-text"
+                style="color: #1c7ed6"
+              ></i> -->
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                required
+                id="id_image"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+{% endblock%}
