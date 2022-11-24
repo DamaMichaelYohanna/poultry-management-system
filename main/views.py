@@ -11,7 +11,7 @@ def store(request):
 
 
 def farm_detail(request):
-    pass
+    return render(request, 'farm.html')
 
 
 def sell_product(request):
