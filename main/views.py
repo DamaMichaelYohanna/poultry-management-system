@@ -8,7 +8,8 @@ def index(request):
 
 
 def store(request):
-    pass
+    context = {}
+    return render(request, 'store.html', context)
 
 
 def farm_detail(request):
