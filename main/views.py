@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 from .models import Farm, Store
 
 
@@ -7,10 +8,11 @@ def index(request):
     return render(request, "index.html")
 
 
-def store(request):
-    item = Store.objects.all()
-    context = {'stock': item}
-    return render(request, 'store.html', context)
+class Store(ListView):
+    model = Store
+    template_name = 'store.html'
+    paginate_by = 10
+    context_object_name = 'stock'
 
 
 def farm_detail(request):
