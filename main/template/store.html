@@ -39,12 +39,51 @@
           <td>{{item.rate}}</td>
           <td>{{item.total}}</td>
           <td>
-            <a href="" class="btn btn-dark" style="background: red">restock</a>
+            <a href="" class="btn btn-dark" style="background: red">Pick out</a>
           </td>
         </tr>
         {% endfor %}
       </table>
     </div>
+    <section class="pt-4">
+      <div class="pagination">
+        <span class="step-links">
+          {% if page_obj.has_previous %}
+          <a
+            href="?page={{ page_obj.previous_page_number }}"
+            class="btn"
+            style="border: 1px solid grey; margin: 0px"
+            >Previous Page</a
+          >
+          {% else %}
+          <a href="" class="btn" style="border: 1px solid grey; margin: 0px"
+            >Previous Page</a
+          >
+          {% endif %}
+
+          <span
+            class="current"
+            style="
+              color: blue;
+              font-weight: bold;
+              padding: 7px 12px;
+              font-size: larger;
+            "
+          >
+            {{ page_obj.number }}
+          </span>
+
+          {% if page_obj.has_next %}
+          <a
+            href="?page={{ page_obj.next_page_number }}"
+            class="btn"
+            style="border: 1px solid grey; margin: 0px"
+            >Next Page</a
+          >
+          {% endif %}
+        </span>
+      </div>
+    </section>
   </div>
   {% endblock %}
 </div>
