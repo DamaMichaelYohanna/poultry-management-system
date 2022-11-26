@@ -11,7 +11,7 @@ def index(request):
 class Store(ListView):
     model = Store
     template_name = 'store.html'
-    paginate_by = 10
+    paginate_by = 6
     context_object_name = 'stock'
 
 
