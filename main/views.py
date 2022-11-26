@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Farm
+from .models import Farm, Store
 
 
 def index(request):
@@ -8,7 +8,8 @@ def index(request):
 
 
 def store(request):
-    context = {}
+    item = Store.objects.all()
+    context = {'stock': item}
     return render(request, 'store.html', context)
 
 
