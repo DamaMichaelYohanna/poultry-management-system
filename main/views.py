@@ -15,6 +15,10 @@ class Store(ListView):
     context_object_name = 'stock'
 
 
+def pick_out(request):
+    return render(request, 'pickout.html')
+
+
 def farm_detail(request):
     detail = Farm.objects.get(id=1)
     return render(request, 'farm.html', {'farm': detail})
