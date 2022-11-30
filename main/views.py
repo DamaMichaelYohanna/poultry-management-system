@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView
-from .models import Farm, Store
+from django.contrib import messages
+from .models import Farm, Store, Item
 
 
 def index(request):
@@ -13,6 +14,18 @@ class Store(ListView):
     template_name = 'store.html'
     paginate_by = 6
     context_object_name = 'stock'
+
+
+def add_to_store_item(request):
+    if request.method == 'POST':
+        name = request.POST.get('item')
+        desc = request.POST.get('description')
+        if name and desc:
+            Item.objects.create(name=name, description=desc)
+            print("done")
+            messages.success(request, "Item added successfully")
+
+    return redirect(reverse("main:store"))
 
 
 def pick_out(request):
