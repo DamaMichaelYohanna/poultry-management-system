@@ -17,6 +17,7 @@ class Store(ListView):
 
 
 def add_to_store_item(request):
+    """view to add to stock item in store"""
     if request.method == 'POST':
         name = request.POST.get('item')
         desc = request.POST.get('description')
@@ -28,7 +29,7 @@ def add_to_store_item(request):
     return redirect(reverse("main:store"))
 
 
-def pick_out(request):
+def pick_out(request, pk):
     return render(request, 'pickout.html')
 
 
