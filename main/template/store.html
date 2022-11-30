@@ -47,7 +47,12 @@
           <td>{{item.rate}}</td>
           <td>{{item.total}}</td>
           <td>
-            <a href="" class="btn btn-dark" style="background: red">Pick out</a>
+            <a
+              href="/store/pickout/{{item.id}}"
+              class="btn btn-dark"
+              style="background: red"
+              >Pick out</a
+            >
           </td>
         </tr>
         {% endfor %}
