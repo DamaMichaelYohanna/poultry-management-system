@@ -9,6 +9,6 @@ urlpatterns = [
     path('farm', views.farm_detail, name='farm'),
     path('store', views.Store.as_view(), name='store'),
     path('store/add/item', views.add_to_store_item, name='add item'),
-    path("store/pickout", views.pick_out, name='pickout'),
+    path("store/pickout/<int:pk>", views.pick_out, name='pickout'),
 
 ]
