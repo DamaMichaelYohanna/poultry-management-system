@@ -1,0 +1,86 @@
+{% extends 'base.html' %} {% load static %} {% block title %}PMS | Store Items
+{%endblock%} {% block content %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentjhjhjkhhjkh</title>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#MyModal").modal("show");
+      });
+    </script>
+  </head>
+  <body>
+    <button
+      class="btn btn-primary"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#MyModal"
+    >
+      Lauch modal
+    </button>
+    <div
+      class="modal fade"
+      id="MyModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="MyModalTitle"
+      aria-hidden="True"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="model-title" id="MyModalTitle">Pick out Item</h5>
+            <button
+              class="close"
+              type="button"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times</span>
+            </button>
+          </div>
+          <!-- modal body -->
+          <div class="modal-body">
+            <form action="/store/pickout" method="POST">
+              <input
+                type="datetime-local"
+                name="date"
+                id="date"
+                class="form-control"
+              />
+              <br />
+              <input
+                type="text"
+                name="item"
+                class="form-control"
+                placeholder="item name"
+              />
+              <br />
+              <input
+                type="text"
+                name="quantity"
+                placeholder="quantity"
+                class="form-control"
+              />
+              {% csrf_token %}
+              <button>Pick out</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}
