@@ -8,7 +8,7 @@
     <div class="col-md-4" style="text-align: right">
       <a
         href=""
-        class="btn btn-primary"
+        class="btn btn-success"
         type="button"
         data-bs-toggle="modal"
         data-bs-target="#NewItem"
@@ -191,7 +191,7 @@
         </div>
         <!-- modal body -->
         <div class="modal-body">
-          <form action="/store/new" method="POST">
+          <form action="/store/add/item" method="POST">
             <input
               type="text"
               name="item"
@@ -207,7 +207,7 @@
             />
             {% csrf_token %}
             <br />
-            <button class="btn btn-success">Pick out</button>
+            <button class="btn btn-success">Add Entry</button>
           </form>
         </div>
         <div class="modal-footer">
