@@ -34,15 +34,21 @@ def add_to_store_item(request):
 
 def pick_out(request, pk):
     item = Store.objects.get(pk=pk)
-    print(item.item)
-    print(item.quantity)
     if request.method == 'POST':
-        pick_out_form = PickOutForm(request.POST)
-        if pick_out_form.is_valid():
-            print(pick_out_form.cleaned_data)
-            print("form is clean")
+        post_item = request.POST.get('item')
+        post_quantity = request.POST.get('quantity')
+        if post_item and post_quantity:
+            item.quantity -= int(post_quantity)
+            item.save()
+            if item.quantity == 0:
+                del item
+            else:
+                item.save()
+            return redirect(reverse("main:store"))
         else:
-            print("form is invalid")
+            print(post_item, post_quantity)
+            print("something went wrong")
+
     else:
         pass
     context = {'item': item.item, 'quantity': item.quantity}
