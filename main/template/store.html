@@ -99,79 +99,8 @@
     </section>
   </div>
 </div>
-<!-- check out section -->
-<section>
-  <button
-    class="btn btn-primary"
-    type="button"
-    data-bs-toggle="modal"
-    data-bs-target="#MyModal"
-  >
-    Lauch modal
-  </button>
-  <div
-    class="modal fade"
-    id="MyModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="MyModalTitle"
-    aria-hidden="True"
-  >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="model-title" id="MyModalTitle">Pick out Item</h5>
-          <button
-            class="close"
-            type="button"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times</span>
-          </button>
-        </div>
-        <!-- modal body -->
-        <div class="modal-body">
-          <form action="/store/pickout" method="POST">
-            <input
-              type="datetime-local"
-              name="date"
-              id="date"
-              class="form-control"
-            />
-            <br />
-            <input
-              type="text"
-              name="item"
-              class="form-control"
-              placeholder="item name"
-            />
-            <br />
-            <input
-              type="text"
-              name="quantity"
-              placeholder="quantity"
-              class="form-control"
-            />
-            {% csrf_token %}
-            <button>Pick out</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            close
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- new item modal -->
+<!-- new entr modal -->
 <section>
   <div
     class="modal fade"
@@ -184,7 +113,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="model-title" id="NewItemTitle">Pick out Item</h5>
+          <h5 class="model-title" id="NewItemTitle">Add New Entry</h5>
           <button
             class="close"
             type="button"
