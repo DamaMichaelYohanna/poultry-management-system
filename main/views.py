@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView
 from django.contrib import messages
+
+
 from .models import Farm, Store, Item
+from .forms import PickOutForm
 
 
 def index(request):
@@ -9,7 +12,7 @@ def index(request):
     return render(request, "index.html")
 
 
-class Store(ListView):
+class StoreView(ListView):
     model = Store
     template_name = 'store.html'
     paginate_by = 6
@@ -30,7 +33,20 @@ def add_to_store_item(request):
 
 
 def pick_out(request, pk):
-    return render(request, 'pickout.html')
+    item = Store.objects.get(pk=pk)
+    print(item.item)
+    print(item.quantity)
+    if request.method == 'POST':
+        pick_out_form = PickOutForm(request.POST)
+        if pick_out_form.is_valid():
+            print(pick_out_form.cleaned_data)
+            print("form is clean")
+        else:
+            print("form is invalid")
+    else:
+        pass
+    context = {'item': item.item, 'quantity': item.quantity}
+    return render(request, 'pickout.html', context)
 
 
 def farm_detail(request):
