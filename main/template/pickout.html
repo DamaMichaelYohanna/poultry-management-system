@@ -1,82 +1,80 @@
-{% extends 'base.html' %} {% load static %} {% block title %}PMS | Store Items
-{%endblock%} {% block content %}
+{% load static %}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Documentjhjhjkhhjkh</title>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $("#MyModal").modal("show");
-      });
-    </script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    />
+    <!-- js file -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
-  <body class="modal-open" style="overflow: hidden; padding-right: 0px">
-    <button
-      class="btn btn-primary"
-      type="button"
-      data-bs-toggle="modal"
-      data-bs-target="#MyModal"
-    >
-      Lauch modal
-    </button>
+  <body
+    class="modal-open"
+    style="overflow: hidden; padding-right: 0px"
+    data-bs-overflow="hidden"
+    data-bs-padding-right="0px"
+  >
     <div
-      class="modal fade"
+      class="modal fade show"
       id="MyModal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="MyModalTitle"
       aria-hidden="True"
+      style="display: block"
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="model-title" id="MyModalTitle">Pick out Item</h5>
-            <button
+            <!-- <button
               class="close"
               type="button"
               data-bs-dismiss="modal"
               aria-label="Close"
             >
               <span aria-hidden="true">&times</span>
-            </button>
+            </button> -->
           </div>
           <!-- modal body -->
           <div class="modal-body">
-            <form action="/store/pickout" method="POST">
-              <input
-                type="datetime-local"
-                name="date"
-                id="date"
-                class="form-control"
-              />
-              <br />
+            <form action="" method="POST">
               <input
                 type="text"
                 name="item"
+                value="{{item}}"
                 class="form-control"
                 placeholder="item name"
               />
               <br />
               <input
-                type="text"
+                type="number"
                 name="quantity"
-                placeholder="quantity"
+                placeholder="quantity | maximum of {{quantity}}"
+                min="0"
+                max="{{quantity}}"
                 class="form-control"
               />
               {% csrf_token %}
-              <button>Pick out</button>
+              <br />
+              <button class="btn btn-success" style="width: 100%">
+                Pick out
+              </button>
             </form>
           </div>
           <div class="modal-footer">
-            <button
+            <!-- <button
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
               close
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -84,4 +82,3 @@
     <div class="modal-backdrop fade show"></div>
   </body>
 </html>
-{% endblock %}
