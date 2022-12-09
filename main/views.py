@@ -4,7 +4,7 @@ from django.contrib import messages
 
 
 from .models import Farm, Store, Item
-from .forms import PickOutForm
+from .forms import RestockForm
 
 
 def index(request):
@@ -29,7 +29,24 @@ def add_to_store_item(request):
             print("done")
             messages.success(request, "Item added successfully")
 
-    return redirect(reverse("main:store"))
+        return redirect(reverse("main:store"))
+    else:
+        pass
+    context = {}
+    return render(request, 'restock.html', context)
+
+
+def restock(request):
+    if request.method == 'POST':
+        restock_form = RestockForm(request.POST)
+        if restock_form.is_valid():
+            restock_form.save()
+            return redirect(reverse('main:store'))
+    else:
+        restock_form = RestockForm()
+    context = {'form': restock_form}
+    print(context)
+    return render(request, 'restock.html', context)
 
 
 def pick_out(request, pk):
