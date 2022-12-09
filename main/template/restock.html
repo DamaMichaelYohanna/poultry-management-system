@@ -31,7 +31,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="model-title" id="MyModalTitle">Pick out Item</h5>
+            <h5 class="model-title" id="MyMosdalTitle">Restock Item</h5>
             <!-- <button
               class="close"
               type="button"
@@ -44,26 +44,48 @@
           <!-- modal body -->
           <div class="modal-body">
             <form action="" method="POST">
-              <input
-                type="text"
-                name="item"
-                value="{{item}}"
-                class="form-control"
-                placeholder="item name"
-              />
-              <br />
-              <input
-                type="number"
-                name="quantity"
-                placeholder="quantity | maximum of {{quantity}}"
-                min="0"
-                max="{{quantity}}"
-                class="form-control"
-              />
+              <p class="input-group">
+                <label for="id_item" class="input-group-text">Item:</label>
+                <select name="item" required id="id_item" class="form-control">
+                  <option value="" selected>---------</option>
+
+                  <option value="1">Chikun starter</option>
+
+                  <option value="3">Ultimate super starter</option>
+                </select>
+              </p>
+
+              <p class="input-group">
+                <label for="id_quantity" class="input-group-text"
+                  >Quantity:</label
+                >
+                <input
+                  class="form-control"
+                  type="number"
+                  name="quantity"
+                  min="0"
+                  required
+                  id="id_quantity"
+                  placeholder="Quantity of item"
+                />
+              </p>
+
+              <p class="input-group">
+                <label for="id_rate" class="input-group-text">Rate:</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  name="rate"
+                  min="0"
+                  required
+                  id="id_rate"
+                  placeholder="Price per each"
+                />
+              </p>
               {% csrf_token %}
               <br />
               <button class="btn btn-success" style="width: 100%">
-                Pick out
+                Restock
               </button>
             </form>
           </div>
