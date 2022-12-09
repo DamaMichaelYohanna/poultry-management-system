@@ -14,8 +14,11 @@
         data-bs-target="#NewItem"
         >New Entry</a
       >
-      <a href="" class="btn btn-dark" style="background-color: rgb(56, 63, 56)"
-        >Stock In</a
+      <a
+        href="/store/item/restock"
+        class="btn btn-dark"
+        style="background-color: rgb(56, 63, 56)"
+        >Stock In here</a
       >
     </div>
   </div>
@@ -25,8 +28,15 @@
     <div class="col-md-4"></div>
     <div class="col-md-4" style="text-align: right">
       <form action="" method="get">
-        <input type="text" name="search" id="search" placeholder="search" />
-        <button>search</button>
+        <input
+          type="text"
+          name="search"
+          id="search"
+          placeholder="search"
+          class="form-control"
+          style="display: inline-block; width: 80%"
+        />
+        <button class="btn btn-primary">search</button>
       </form>
     </div>
     <div class="pt-5 container">
@@ -48,7 +58,7 @@
           <td>{{item.total}}</td>
           <td>
             <a
-              href="/store/pickout/{{item.id}}"
+              href="/store/item/pickout/{{item.id}}"
               class="btn btn-dark"
               style="background: red"
               >Pick out</a
