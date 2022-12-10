@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% load static %} {% block title%}{{section}
+}{%endblock %} {% block content%}
+
+<hr style="margin: 0px; opacity: 0.3" />
+<div class="container-fluid pt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <form action="." method="POST">
+        <input type="search" name="search" placeholder="search" />
+        <input type="submit" name="submit" value="Go" />
+        {% csrf_token %}
+      </form>
+    </div>
+    <div class="col-md-6">
+      <form action=".">
+        <div class="input-group">
+          <label style="font-family: helvetica" class="input-group-text"
+            >category</label
+          >
+          <select
+            name="category"
+            id="category"
+            class="form-control"
+            style="width: 70%; display: inline-block"
+          >
+            <option value="all">All</option>
+            {% for item in categories %}
+            <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+          </select>
+          <input class="btn btn-light" type="submit" />
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr style="opacity: 0.3; box-shadow: 11px 2px 6px rgb(36, 68, 24)" />
+  <div class="container-fluid">
+    <div class="row">
+      {% for good in products %}
+      <div class="col-md-3 pe-5" style="text-align: center">
+        <img src="{{good.picture.url}} " height="100%" width="100%" />
+        <b style="color: tomato">{{ good.id }}</b>
+        {{ good.name|truncatewords:3}}
+        <p style="margin: 0px; text-align: center">
+          Price: <b>#{{good.price}}</b>
+        </p>
+        <hr style="color: tomato; width: 100%" />
+        {% if good.name not in order %}
+        <a
+          style="color: tomato; text-decoration: none"
+          href="/add_to_cart/{{good.id}}"
+        >
+          Add to Cart
+          <img style="height: 30px; width: 30px" src="{% static 'cart.png'%}" />
+        </a>
+
+        {% else %}
+        <a style="color: tomato; text-decoration: none" href="/check_out/">
+          Check Out
+        </a>
+        |
+        <a
+          style="color: tomato; text-decoration: none"
+          href="/remove_from_cart/{{good.id}}"
+        >
+          Remove
+        </a>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    <!-- <p style="text-align: center;">
+			<p style="border-radius: 40px;background: white;text-align: center;margin-right: 5%">
+				<img src="{% static 'emptydb.jpeg' %}">
+			</p>
+			
+			<h1 style="text-align: center;">
+				No Records Found
+			</h1>
+		</p> -->
+  </div>
+  {% endblock %}
+</div>
