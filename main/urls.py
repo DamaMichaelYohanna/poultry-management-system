@@ -11,5 +11,10 @@ urlpatterns = [
     path('store/item/add', views.add_to_store_item, name='add item'),
     path('store/item/restock', views.restock, name='restock'),
     path("store/item/pickout/<int:pk>", views.pick_out, name='pickout'),
+#     urls for products
+    path('product/dashboard', views.product_dashboard, name='product dashboard'),
+    path('product/add', views.product_add, name='product add'),
+    path('product/update', views.product_update, name='product update'),
+    path('product/delete/<int:pk>', views.product_delete, name='product delete'),
 
 ]
