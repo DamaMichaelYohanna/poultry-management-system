@@ -38,29 +38,33 @@
     <div class="row">
       {% for good in products %}
       <div class="col-md-3 pe-5" style="text-align: center">
-        <img src="{{good.picture.url}} " height="100%" width="100%" />
-        <b style="color: tomato">{{ good.id }}</b>
+        <img src="{{good.image.url}} " height="200px" width="200px" />
+        <br />
+        <b style="color: rgba(9, 58, 9, 0.726)">{{ good.id }}</b>
         {{ good.name|truncatewords:3}}
         <p style="margin: 0px; text-align: center">
           Price: <b>#{{good.price}}</b>
         </p>
-        <hr style="color: tomato; width: 100%" />
+        <hr style="color: rgba(9, 58, 9, 0.726); width: 100%" />
         {% if good.name not in order %}
         <a
-          style="color: tomato; text-decoration: none"
-          href="/add_to_cart/{{good.id}}"
+          style="color: rgba(9, 58, 9, 0.726); text-decoration: none"
+          href="/product/add_to_cart/{{good.id}}"
         >
           Add to Cart
           <img style="height: 30px; width: 30px" src="{% static 'cart.png'%}" />
         </a>
 
         {% else %}
-        <a style="color: tomato; text-decoration: none" href="/check_out/">
+        <a
+          style="color: rgba(9, 58, 9, 0.726); text-decoration: none"
+          href="/check_out/"
+        >
           Check Out
         </a>
         |
         <a
-          style="color: tomato; text-decoration: none"
+          style="color: rgba(9, 58, 9, 0.726); text-decoration: none"
           href="/remove_from_cart/{{good.id}}"
         >
           Remove
