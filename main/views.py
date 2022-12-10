@@ -3,7 +3,7 @@ from django.views.generic import ListView
 from django.contrib import messages
 
 
-from .models import Farm, Store, Item
+from .models import Farm, Store, Item, Product
 from .forms import RestockForm
 
 
@@ -77,9 +77,20 @@ def farm_detail(request):
     return render(request, 'farm.html', {'farm': detail})
 
 
-def sell_product(request):
-    pass
+def product_dashboard(request):
+    product = Product.objects.all()
+    context = {'products': product}
+    return render(request, 'shopping.html', context)
 
+
+def product_add(request):
+    return render(request, 'product_')
+
+def product_update(request):
+    return render(request, 'product_')
+
+def product_delete(request):
+    return render(request, 'product_')
 
 def invoice(request):
     pass
