@@ -53,3 +53,9 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Order(models.Model):
+    """model for product to have been added to cart"""
+    product = models.ManyToManyField(Product)
+    date = models.DateTimeField(auto_now=True)
