@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView
 from django.contrib import messages
 
-
-from .models import Farm, Store, Item, Product
+from .models import Farm, Store, Item, Product, Category, Order
 from .forms import RestockForm
 
 
@@ -79,18 +78,54 @@ def farm_detail(request):
 
 def product_dashboard(request):
     product = Product.objects.all()
-    context = {'products': product}
+    category = Category.objects.all()
+    try:
+        cart = Order.objects.all()[0].product.all()
+    except AttributeError:
+        cart = None
+    context = {'products': product, 'category': category, 'order': cart}
     return render(request, 'shopping.html', context)
 
+
+def add_to_cart(request, pk):
+    product = Product.objects.get(pk=pk)
+    order = Order.objects.all()[0]
+    if product not in order.product.all():
+        order.product.add(product)
+        order.save()
+    messages.success(request, 'added to cart successfully')
+    return redirect(reverse('main:product_dashboard'))
+
+
+def remove_from_cart(request, pk):
+    product = Product.objects.get(pk=pk)
+    order = Order.objects.all()[0]
+    if product in order.product.all():
+        order.product.remove(product)
+        order.save()
+
+    messages.success(request, 'removed from cart successfully')
+    return redirect(reverse('main:product_dashboard'))
+
+
+def checkout(request):
+    if request.method == 'POST':
+        pass
+    else:
+        pass
+    return render(request, 'checkout.html')
 
 def product_add(request):
     return render(request, 'product_')
 
+
 def product_update(request):
     return render(request, 'product_')
 
+
 def product_delete(request):
     return render(request, 'product_')
+
 
 def invoice(request):
     pass
