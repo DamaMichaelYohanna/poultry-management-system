@@ -109,11 +109,14 @@ def remove_from_cart(request, pk):
 
 
 def checkout(request):
+    order = Order.objects.all()[0]
     if request.method == 'POST':
         pass
     else:
         pass
-    return render(request, 'checkout.html')
+    context = {'order': order.product.all()}
+    return render(request, 'checkout.html', context)
+
 
 def product_add(request):
     return render(request, 'product_')
