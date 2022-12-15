@@ -59,3 +59,16 @@ class Order(models.Model):
     """model for product to have been added to cart"""
     product = models.ManyToManyField(Product)
     date = models.DateTimeField(auto_now=True)
+
+
+class Invoice(models.Model):
+    """model for the various invoices"""
+    ref = models.PositiveIntegerField()
+    customer = models.CharField(max_length=20)
+    contact = models.CharField(max_length=12)
+    payment = models.CharField(max_length=10, default='cash')
+    goods = models.ManyToManyField(Product)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.ref
