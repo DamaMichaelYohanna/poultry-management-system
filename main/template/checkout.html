@@ -4,34 +4,106 @@
   <h2 class="pt-5">Confirm list of items.</h2>
   <hr />
   <div class="row">
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <form action="" method="POST">
         <p>
           <label for="name">Customer Name</label>
           <br />
-          <input type="text" name="name" id="name" class="form-control" />
+          <br />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="form-control"
+            required
+          />
         </p>
-        <label for="name">Customer Contact</label>
+        <p>
+          <label for="contact">Customer Contact</label>
+          <br />
+          <br />
+          <input
+            type="text"
+            name="contact"
+            id="contact"
+            class="form-control"
+            required
+          />
+        </p>
+        <p>
+          <span style="font-weight: bold">Mode of Payment</span> |
+          <label for="payment">Cash</label>
+          <input type="radio" name="payment" id="payment" value="cash" />
+          <label for="payment">POS</label>
+          <input type="radio" name="payment" id="payment" value="pos" />
+          <label for="payment">Transfer</label>
+          <input type="radio" name="payment" id="payment" value="transfer" />
+        </p>
+        {% csrf_token %}
         <br />
-        <input type="text" name="contact" id="contact" class="form-control" />
+        <button class="btn btn-success">Proceed</button>
       </form>
-    </div>
+    </div> -->
     <div class="col-md-6">
-      <table class="table">
-        <tr>
-          <th>Product Name</th>
-          <th>price</th>
-          <th>quantity</th>
-        </tr>
-        {% for product in order %}
-        <tr>
-          <td>{{product.name}}</td>
-          <td>{{product.price}}</td>
-          <td>{{product.quantity}}</td>
-        </tr>
-        {% endfor %}
-      </table>
-      Total Price:
+      <form action="" method="POST">
+        <table class="table">
+          <tr>
+            <th>Product Name</th>
+            <th>price</th>
+            <th>quantity</th>
+          </tr>
+          {% for product in order %}
+          <tr>
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td>
+              <input
+                type="text"
+                name="{{product.name}}"
+                id="quantity"
+                value="{{product.quantity}}"
+              />
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        <p style="text-align: right">Total Price: {{total}}</p>
+
+        <p>
+          <label for="name">Customer Name</label>
+          <br />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="form-control"
+            required
+          />
+        </p>
+        <p>
+          <label for="contact">Customer Contact</label>
+          <br />
+          <input
+            type="text"
+            name="contact"
+            id="contact"
+            class="form-control"
+            required
+          />
+        </p>
+        <p>
+          <span style="font-weight: bold">Mode of Payment</span> |
+          <label for="payment">Cash</label>
+          <input type="radio" name="payment" id="payment" value="cash" />
+          <label for="payment">POS</label>
+          <input type="radio" name="payment" id="payment" value="pos" />
+          <label for="payment">Transfer</label>
+          <input type="radio" name="payment" id="payment" value="transfer" />
+        </p>
+        {% csrf_token %}
+        <br />
+        <button class="btn btn-success">Proceed</button>
+      </form>
     </div>
   </div>
 </div>
