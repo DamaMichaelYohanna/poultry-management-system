@@ -110,11 +110,16 @@ def remove_from_cart(request, pk):
 
 def checkout(request):
     order = Order.objects.all()[0]
+    total_price = 0
+    for i in order.product.all():
+        total_price += i.price
     if request.method == 'POST':
-        pass
+        name = request.POST.get('name')
+        contact = request.POST.get('contact')
+
     else:
         pass
-    context = {'order': order.product.all()}
+    context = {'order': order.product.all(), 'total': total_price}
     return render(request, 'checkout.html', context)
 
 
