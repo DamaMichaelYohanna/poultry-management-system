@@ -114,8 +114,17 @@ def checkout(request):
     for i in order.product.all():
         total_price += i.price
     if request.method == 'POST':
+        print(request.POST)
         name = request.POST.get('name')
         contact = request.POST.get('contact')
+        quantity = request.POST.get('quantity')
+        payment = request.POST.get('payment')
+        for item in order.product.all():
+            if item.name in request.POST:
+                print(item)
+            else:
+                pass
+        print(name, contact, quantity, payment)
 
     else:
         pass
