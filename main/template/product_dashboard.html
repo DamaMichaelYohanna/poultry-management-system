@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load static %} {% block title %}PMS | Store Items
+{% endblock %} {%block content %}
+<div class="container-fluid pt-5 ps-5 pe-5">
+  <h3 class="pb-3">Product For Sale</h3>
+  <table class="table">
+    <tr>
+      <th>S/N</th>
+      <th>name</th>
+      <th>category</th>
+      <th>price</th>
+      <th>quantity</th>
+      <th>Action</th>
+    </tr>
+    {% for item in products %}
+    <tr>
+      <td>{{forloop.counter}}</td>
+      <td>
+        <img src="{{item.picture.url}}" alt="product image" />{{item.name}}
+      </td>
+      <td>{{item.category}}</td>
+      <td>{{item.price}}</td>
+      <td><input type="text" name="quantity" /></td>
+      <td><a href="" class="btn btn-success">Add to Cart</a></th>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
