@@ -61,7 +61,7 @@
                 type="text"
                 name="{{product.name}}"
                 id="quantity"
-                value="{{product.quantity}}"
+                value="1"
               />
             </td>
           </tr>
@@ -103,6 +103,7 @@
         {% csrf_token %}
         <br />
         <button class="btn btn-success">Proceed</button>
+        <a href="/product/clear_cart" class="btn btn-danger">Clear selection</a>
       </form>
     </div>
   </div>
