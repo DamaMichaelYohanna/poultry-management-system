@@ -61,14 +61,24 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now=True)
 
 
+class InvoiceProduct(models.Model):
+    """models for product that are sold out"""
+    name = models.CharField(max_length=20)
+    quantity = models.PositiveIntegerField()
+    ref = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.name}"
+
+
 class Invoice(models.Model):
     """model for the various invoices"""
     ref = models.PositiveIntegerField()
     customer = models.CharField(max_length=20)
     contact = models.CharField(max_length=12)
     payment = models.CharField(max_length=10, default='cash')
-    goods = models.ManyToManyField(Product)
+    goods = models.ManyToManyField(InvoiceProduct)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.ref
+        return str(self.ref)
