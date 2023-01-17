@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView
 from django.contrib import messages
 
-from .models import Farm, Store, Item, Product, Category, Order
+from .models import Farm, Store, Item, Product, Category, Order, InvoiceProduct, Invoice
 from .forms import RestockForm
 
 
@@ -108,6 +108,12 @@ def remove_from_cart(request, pk):
     return redirect(reverse('main:product_dashboard'))
 
 
+def clear_cart(request):
+    Order.objects.all().delete()
+    # del order
+    return redirect(reverse('main:product_dashboard'))
+
+
 def checkout(request):
     order = Order.objects.all()[0]
     total_price = 0
@@ -119,12 +125,21 @@ def checkout(request):
         contact = request.POST.get('contact')
         quantity = request.POST.get('quantity')
         payment = request.POST.get('payment')
-        for item in order.product.all():
-            if item.name in request.POST:
-                print(item)
-            else:
-                pass
-        print(name, contact, quantity, payment)
+        ref_code = 123456
+        # for item in order.product.all():
+        #     if item.name in request.POST:
+        #         print(item, request.POST.get(item.name))
+        #         InvoiceProduct.objects.create(name=item.name, quantity=request.POST.get(item.name), ref=ref_code)
+        #     else:
+        #         pass
+        purchase_item = InvoiceProduct.objects.filter(ref=ref_code)
+        if purchase_item:
+            obj = Invoice(ref=ref_code, customer=name, contact=contact, payment=payment)
+            obj.save()
+            obj.goods.add(*purchase_item)
+            obj.save()
+            messages.success(request, "Record saved successfully")
+            return redirect(reverse('main:product_dashboard'))
 
     else:
         pass
