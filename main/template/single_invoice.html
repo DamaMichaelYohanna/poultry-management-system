@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% load static %} {% block title %}PMS | Store Items
+{% endblock %} {%block content %}
+<div class="container-fluid pt-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img
+        src="{% static 'pic.png' %}"
+        height="200px"
+        width="400px"
+        alt="No picture"
+      />
+    </div>
+    <div class="col-md-6 pt-4">
+      <div>
+        <p>Invoice/ Reciept</p>
+        <table class="table">
+          <tr>
+            <th>Date</th>
+            <td>{{obj.date}}</td>
+          </tr>
+          <tr>
+            <th>Reference Number</th>
+            <td>{{obj.ref}}</td>
+          </tr>
+          <tr>
+            <th>Customer Nmae</th>
+            <td>{{obj.customer}}</td>
+          </tr>
+          <tr>
+            <th>Phone number</th>
+            <td>{{obj.contact}}</td>
+          </tr>
+          <tr>
+            <th>Payment Mode</th>
+            <td>{{obj.payment}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- item list -->
+  <hr />
+  {{obj}} {{obj.product}}
+  <div>
+    <table class="table">
+      <tr>
+        <th>#</th>
+        <th>Product Name</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+      </tr>
+
+      {% for good in obj.goods.all %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{good.name}}</td>
+        <td>{{good.price}}</td>
+        <td>{{good.quantity}}</td>
+        <td>{{good.}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock content %}

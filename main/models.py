@@ -65,10 +65,15 @@ class InvoiceProduct(models.Model):
     """models for product that are sold out"""
     name = models.CharField(max_length=20)
     quantity = models.PositiveIntegerField()
+    price = models.PositiveIntegerField(default=0)
     ref = models.PositiveIntegerField()
 
     def __str__(self):
         return f"{self.name}"
+
+    @staticmethod
+    def total():
+        return quantity * price
 
 
 class Invoice(models.Model):

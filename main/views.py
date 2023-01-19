@@ -82,17 +82,25 @@ def product_dashboard(request):
     try:
         cart = Order.objects.all()[0].product.all()
     except AttributeError:
-        cart = None
+        cart = []
+    except IndexError:
+        cart = []
     context = {'products': product, 'category': category, 'order': cart}
     return render(request, 'shopping.html', context)
 
 
 def add_to_cart(request, pk):
     product = Product.objects.get(pk=pk)
-    order = Order.objects.all()[0]
-    if product not in order.product.all():
+    try:
+        order = Order.objects.all()[0]
+    except IndexError:
+        order = Order.objects.create()
         order.product.add(product)
         order.save()
+    else:
+        if product not in order.product.all():
+            order.product.add(product)
+            order.save()
     messages.success(request, 'added to cart successfully')
     return redirect(reverse('main:product_dashboard'))
 
@@ -134,12 +142,12 @@ def checkout(request):
         #         pass
         purchase_item = InvoiceProduct.objects.filter(ref=ref_code)
         if purchase_item:
-            obj = Invoice(ref=ref_code, customer=name, contact=contact, payment=payment)
-            obj.save()
-            obj.goods.add(*purchase_item)
-            obj.save()
+            # obj = Invoice(ref=ref_code, customer=name, contact=contact, payment=payment)
+            # obj.save()
+            # obj.goods.add(*purchase_item)
+            # obj.save()
             messages.success(request, "Record saved successfully")
-            return redirect(reverse('main:product_dashboard'))
+            return redirect(f'/invoice/{ref_code}')
 
     else:
         pass
@@ -159,5 +167,13 @@ def product_delete(request):
     return render(request, 'product_')
 
 
-def invoice(request):
-    pass
+def invoice(request, ref):
+    obj = Invoice.objects.get(ref=ref)
+    context = {'obj': obj}
+    return render(request, 'single_invoice.html', context)
+
+
+def all_invoice(request):
+    obj = Invoice.objects.all()
+    context = {'obj': obj}
+    return render(request, 'invoices.html', context)
