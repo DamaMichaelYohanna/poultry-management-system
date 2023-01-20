@@ -71,9 +71,8 @@ class InvoiceProduct(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-    @staticmethod
-    def total():
-        return quantity * price
+    def total(self):
+        return self.quantity * self.price
 
 
 class Invoice(models.Model):
