@@ -1,1 +1,87 @@
-{% extends 'base.html' %} {% block title %} Home page {% endblock %}
+{% extends 'base.html' %}{% load static %} {% block title %} Home page
+{%endblock %} {%block content %}
+<div class="container-fluid pt-5 ps-5">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        <div
+          class="col-md-5 pt-3 ps-3 pe-3 pb-3"
+          style="
+            background-color: rgb(40, 180, 180);
+            border-radius: 10px;
+            margin: 10px 10px 10px 10px;
+          "
+        >
+          <h5 style="padding-bottom: 10px">Register User</h5>
+          <h2 style="padding-bottom: 30px">10</h2>
+        </div>
+        <div
+          class="col-md-5 pt-3 ps-3 pe-3 pb-3"
+          style="
+            background-color: rgb(223, 48, 48);
+            border-radius: 10px;
+            margin: 10px 10px 10px 10px;
+          "
+        >
+          <h5 style="padding-bottom: 10px">Total Products</h5>
+          <h2 style="padding-bottom: 30px">10</h2>
+        </div>
+        <div
+          class="col-md-5 pt-3 ps-3 pe-3 pb-3"
+          style="
+            background-color: rgb(17, 172, 76);
+            border-radius: 10px;
+            margin: 10px 10px 10px 10px;
+          "
+        >
+          <h5 style="padding-bottom: 10px">Total Sales till Date</h5>
+          <h2 style="padding-bottom: 30px">1000</h2>
+        </div>
+        <div
+          class="col-md-5 pt-3 ps-3 pe-3 pb-3"
+          style="
+            background-color: rgb(198, 211, 24);
+            border-radius: 10px;
+            margin: 10px 10px 10px 10px;
+          "
+        >
+          <h5 style="padding-bottom: 10px">Sales Last Week</h5>
+          <h2 style="padding-bottom: 30px">10</h2>
+        </div>
+        <div
+          class="col-md-5 pt-3 ps-3 pe-3 pb-3"
+          style="
+            background-color: rgb(8, 90, 90);
+            border-radius: 10px;
+            margin: 10px 10px 10px 10px;
+          "
+        >
+          <h5 style="padding-bottom: 10px">Total Sales(Yesterday)</h5>
+          <h2 style="padding-bottom: 30px">10</h2>
+        </div>
+        <div
+          class="col-md-5 pt-3 ps-3 pe-3 pb-3"
+          style="
+            background-color: rgb(82, 40, 180);
+            border-radius: 10px;
+            margin: 10px 10px 10px 10px;
+          "
+        >
+          <h5 style="padding-bottom: 10px">Total Sales(Today)</h5>
+          <h2 style="padding-bottom: 30px">10</h2>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 pt-4 ps-5" style="text-align: center">
+      <img
+        src="{% static 'pic.png' %}"
+        alt="Farm Picture"
+        width="370px"
+        height="100px"
+      />
+
+      <img src="{% static 'pic.png' %}" alt="" />
+    </div>
+  </div>
+</div>
+{% endblock %}
