@@ -67,6 +67,7 @@ class InvoiceProduct(models.Model):
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField(default=0)
     ref = models.PositiveIntegerField()
+    date = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -86,3 +87,22 @@ class Invoice(models.Model):
 
     def __str__(self):
         return str(self.ref)
+
+
+# model for general goods in the farm
+
+class GProduct(models.Model):
+    """model for general product"""
+    name = models.CharField(max_length=20)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    price = models.PositiveIntegerField()
+    image = models.ImageField(null=True)
+
+
+class GProductCategory(models.Model):
+    """model for general product category """
+    name = models.CharField(max_length=30)
+    code = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.name}'
