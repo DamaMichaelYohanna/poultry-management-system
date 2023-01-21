@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView
 from django.contrib import messages
 
-from .models import Farm, Store, Item, Product, Category, Order, InvoiceProduct, Invoice
-from .forms import RestockForm, GProduct
+from .models import Farm, Store, Item, Product, Category, Order, InvoiceProduct, Invoice, GProduct, GProductCategory
+from .forms import RestockForm, GProductForm, GProductCategoryForm
 
 
 def index(request):
@@ -43,7 +43,7 @@ def product_category(request):
             messages.success(request, "category added successfully.")
             return redirect(reverse("main:category_management"))
     else:
-        form = GProductForm()
+        form = GProductCategoryForm()
         product = GProduct.objects.all()
     context = {'form': form, 'product': product}
     return render(request, 'category_management.html', context)
