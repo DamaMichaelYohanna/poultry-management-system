@@ -97,12 +97,14 @@ class GProduct(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     price = models.PositiveIntegerField()
     image = models.ImageField(null=True)
+    date = models.DateTimeField(auto_now_add=True)
 
 
 class GProductCategory(models.Model):
     """model for general product category """
     name = models.CharField(max_length=30)
     code = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.name}'
