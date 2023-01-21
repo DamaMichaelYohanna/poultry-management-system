@@ -53,8 +53,16 @@
                   >Product Management</a
                 >
                 <ul class="dropdown-menu" aria-labelledby="dropdown09">
-                  <li><a class="dropdown-item" href="#">Manage Category</a></li>
-                  <li><a class="dropdown-item" href="#">Manage Product</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/product/management/category"
+                      >Manage Category</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="/product/management/product"
+                      >Manage Product</a
+                    >
+                  </li>
                 </ul>
               </li>
               <li class="nav-item">
@@ -138,6 +146,6 @@
       </nav>
     </section>
     <!-- main body section | to be filled by other template -->
-    <section>{% block content %} {% endblock %}</section>
+    <section class="ps-5">{% block content %} {% endblock %}</section>
   </body>
 </html>
