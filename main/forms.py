@@ -11,11 +11,11 @@ class RestockForm(forms.ModelForm):
 
 class GProductForm(forms.ModelForm):
     class Meta:
-        models = GProduct
+        model = GProduct
         fields = "__all__"
 
 
 class GProductCategoryForm(forms.ModelForm):
     class Meta:
-        models = GProductCategory
+        model = GProductCategory
         fields = "__all__"
