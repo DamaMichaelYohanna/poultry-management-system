@@ -1,6 +1,5 @@
 from django.urls import path
 
-
 from main import views
 
 app_name = 'main'
@@ -11,7 +10,7 @@ urlpatterns = [
     path('store/item/add', views.add_to_store_item, name='add item'),
     path('store/item/restock', views.restock, name='restock'),
     path("store/item/pickout/<int:pk>", views.pick_out, name='pickout'),
-#     urls for products
+    #     urls for for sales products
     path('product/dashboard', views.product_dashboard,
          name='product_dashboard'),
     path('product/add', views.product_add, name='product add'),
@@ -23,7 +22,12 @@ urlpatterns = [
          name='remove from cart'),
     path("product/clear_cart", views.clear_cart, name="clear cart"),
     path('product/checkout', views.checkout, name='checkout'),
-#     url for invoice
+    #     url for invoice
     path("invoice/<int:ref>", views.invoice, name='invoice'),
     path("invoice/all", views.all_invoice, name='all_invoice'),
+    #     urls for storage products
+    path('product/management/category', views.product_category,
+         name='product_category'),
+    path('product/management/product', views.product_management,
+         name='product_category'),
 ]
