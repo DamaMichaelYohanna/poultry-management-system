@@ -26,8 +26,8 @@ urlpatterns = [
     path("invoice/<int:ref>", views.invoice, name='invoice'),
     path("invoice/all", views.all_invoice, name='all_invoice'),
     #     urls for storage products
-    path('product/management/category', views.product_category,
-         name='product_category'),
+    path('product/management/category', views.category_management,
+         name='category_management'),
     path('product/management/product', views.product_management,
-         name='product_category'),
+         name='product_management'),
 ]
