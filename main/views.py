@@ -28,13 +28,14 @@ def product_management(request):
             return redirect(reverse("main:product_management"))
     else:
         form = GProductForm()
-        product = GProduct.objects.all()
-    context = {'form': form, 'product': product}
+
+    product = GProduct.objects.all()
+    context = {'form': form, 'product': product, 'option': product.category}
 
     return render(request, 'product_management.html', context)
 
 
-def product_category(request):
+def category_management(request):
     """view for listing product category and adding new product"""
     if request.method == 'POST':
         form = GProductCategoryForm(request.POST)
@@ -44,8 +45,8 @@ def product_category(request):
             return redirect(reverse("main:category_management"))
     else:
         form = GProductCategoryForm()
-        product = GProduct.objects.all()
-    context = {'form': form, 'product': product}
+    product = GProductCategory.objects.all()
+    context = {'form': form, 'category': product}
     return render(request, 'category_management.html', context)
 
 
