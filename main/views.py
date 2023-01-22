@@ -1,14 +1,53 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView
 from django.contrib import messages
 
-from .models import Farm, Store, Item, Product, Category, Order, InvoiceProduct, Invoice
-from .forms import RestockForm
+from .models import Farm, Store, Item, Product, Category, Order, InvoiceProduct, Invoice, GProduct, GProductCategory
+from .forms import RestockForm, GProductForm, GProductCategoryForm
 
 
 def index(request):
-    # total_user = U
-    return render(request, "index.html")
+    total_user = User.objects.all().count()
+    total_product = Product.objects.all().count()
+    sale_rec = InvoiceProduct.objects.all()
+    sale_sum = 0
+    for rec in sale_rec:
+        sale_sum += rec.price
+    context = {"user": total_user, 'total_sum': sale_sum, 'total_product': total_product}
+    return render(request, "index.html", context)
+
+
+def product_management(request):
+    """view for listing product and adding new product"""
+    if request.method == 'POST':
+        form = GProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Product added successfully.")
+            return redirect(reverse("main:product_management"))
+    else:
+        form = GProductForm()
+
+    product = GProduct.objects.all()
+    context = {'form': form, 'product': product, 'option': product.category}
+
+    return render(request, 'product_management.html', context)
+
+
+def category_management(request):
+    """view for listing product category and adding new product"""
+    if request.method == 'POST':
+        form = GProductCategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "category added successfully.")
+            return redirect(reverse("main:category_management"))
+    else:
+        form = GProductCategoryForm()
+    product = GProductCategory.objects.all()
+    context = {'form': form, 'category': product}
+    return render(request, 'category_management.html', context)
 
 
 class StoreView(ListView):
