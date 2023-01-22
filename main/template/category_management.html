@@ -1,0 +1,62 @@
+{% extends 'base.html' %}{% load static %} {% block title %} Product Category
+{%endblock %} {%block content %}
+<div class="container-fluid pt-5">
+  <h2 class="pt-4">Register New Category</h2>
+  <hr />
+  <div>
+    <form action="" method="post">
+      <p>
+        <label for="id_name">Name:</label>
+        <br />
+        <input
+          class="form-control"
+          type="text"
+          name="name"
+          maxlength="30"
+          placeholder="Name of Category"
+          required
+          id="id_name"
+          style="width: 70%"
+        />
+      </p>
+
+      <p>
+        <label for="id_code">Code:</label>
+        <input
+          class="form-control"
+          type="text"
+          name="code"
+          placeholder="Category code e.g CAT-0001"
+          maxlength="100"
+          required
+          id="id_code"
+          style="width: 70%"
+        />
+      </p>
+      {% csrf_token %}
+      <button class="btn btn-success">Add Category</button>
+    </form>
+  </div>
+  <div class="pt-5">
+    <table class="table">
+      <tr>
+        <th>S/N</th>
+        <th>Categor</th>
+        <th>CategoryCode</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+        <th></th>
+      </tr>
+      {% for cat in category %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{cat.name}}</td>
+        <td>{{cat.code}}</td>
+        <td>{{cat.date}}</td>
+        <td><a href="http://">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}
