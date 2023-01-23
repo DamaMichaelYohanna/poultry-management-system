@@ -1,6 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block title%}{{section}
-}{%endblock %} {% block content%}
-
+}{%endblock %} {% block content%} {% if products%}
 <hr style="margin: 0px; opacity: 0.3" />
 <div class="container-fluid pt-5">
   <div class="row">
@@ -53,7 +52,6 @@
           href="/product/add_to_cart/{{good.id}}"
         >
           Add to Cart
-          <img style="height: 30px; width: 30px" src="{% static 'cart.png'%}" />
         </a>
 
         {% else %}
@@ -84,5 +82,13 @@
 			</h1>
 		</p> -->
   </div>
-  {% endblock %}
+  {% else %}
+  <div style="text-align: center">
+    <img src="{% static 'emp1.jpg' %}" alt="No record found" />
+    <hr />
+    <h3>No Products found</h3>
+  </div>
+  {% endif %}
 </div>
+
+{% endblock %}
