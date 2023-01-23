@@ -23,9 +23,8 @@
     <!-- header section for nav bar -->
     <section>
       <nav
-        class="navbar navbar-expand-lg navbar-dark"
+        class="navbar navbar-expand-lg navbar-dark bg-success"
         aria-label="Eleventh navbar example"
-        style="background-color: rgba(9, 58, 9, 0.726)"
       >
         <div class="container-fluid">
           <a class="navbar-brand" href="/">Dashboard</a>
@@ -82,24 +81,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/invoice/all">Invoices</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="dropdown09"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  >Reports</a
-                >
-                <ul class="dropdown-menu" aria-labelledby="dropdown09">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                  </li>
-                </ul>
+                <a class="nav-link" href="/invoices">Invoices</a>
               </li>
             </ul>
             <!-- profile picture in nav -->
@@ -112,7 +94,7 @@
                 aria-expanded="false"
                 ><img
                   style="border-radius: 100%"
-                  src="{{ user_profile.image.url }}"
+                  src="{{ user.profile.image }}"
                   alt="Bootstrap"
                   width="30"
                   height="24"
@@ -146,6 +128,9 @@
       </nav>
     </section>
     <!-- main body section | to be filled by other template -->
-    <section class="ps-5">{% block content %} {% endblock %}</section>
+    {% if messages %} {% for message in messages %}
+    <p class="btn btn-warning" style="width: 100%">{{message}}</p>
+    {% endfor %} {% endif %}
+    <section class="ps-5 pe-5">{% block content %} {% endblock %}</section>
   </body>
 </html>
