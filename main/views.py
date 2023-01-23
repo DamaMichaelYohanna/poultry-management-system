@@ -1,20 +1,39 @@
+import datetime
+
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import ListView
 from django.contrib import messages
 
-from .models import Farm, Store, Item, Product, Category, Order, InvoiceProduct, Invoice, GProduct, GProductCategory
+from .models import Farm, Store, Item, Order, InvoiceProduct, Invoice, GProduct, GProductCategory
 from .forms import RestockForm, GProductForm, GProductCategoryForm
+from .utility import generate_ref
 
 
 def index(request):
+
+    def calculate_sum(obj):
+        sale_sum = 0
+        for rec in obj:
+            sale_sum += rec.price
+        return sale_sum
+
     total_user = User.objects.all().count()
-    total_product = Product.objects.all().count()
+    total_product = GProduct.objects.all().count()
+    store_product = Store.objects.all().count()
     sale_rec = InvoiceProduct.objects.all()
-    sale_sum = 0
-    for rec in sale_rec:
-        sale_sum += rec.price
-    context = {"user": total_user, 'total_sum': sale_sum, 'total_product': total_product}
+    today_sales_rec = sale_rec.filter(date=datetime.datetime.now().date())
+    yesterday_sales_rec = sale_rec.filter(
+        date=datetime.datetime.now().date() - datetime.timedelta(days=1)
+    )
+    # --------------------------------------
+    total_sales_sum = calculate_sum(sale_rec)  # calculate total sales ever made
+    today_sales_sum = calculate_sum(today_sales_rec)  # calculate sales for today
+    yesterday_sales_sum = calculate_sum(yesterday_sales_rec)  # calculate sales for today
+
+    context = {"user": total_user, 'total_sum': total_sales_sum,
+               "today_sum": today_sales_sum, 'yesterday_sum': yesterday_sales_sum,
+               'total_product': total_product, 'store': store_product}
     return render(request, "index.html", context)
 
 
@@ -26,11 +45,15 @@ def product_management(request):
             form.save()
             messages.success(request, "Product added successfully.")
             return redirect(reverse("main:product_management"))
+        else:
+            print("forms is invalid")
+            print(form)
     else:
         form = GProductForm()
 
     product = GProduct.objects.all()
-    context = {'form': form, 'product': product, 'option': product.category}
+    category = GProductCategory.objects.all()
+    context = {'form': form, 'product': product, 'cat': category}
 
     return render(request, 'product_management.html', context)
 
@@ -50,6 +73,29 @@ def category_management(request):
     return render(request, 'category_management.html', context)
 
 
+def product_update(request, pk):
+    product = get_object_or_404(GProduct, pk=pk)
+    if request.method == 'POST':
+        form = GProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Product updated successfully.")
+            return redirect(reverse("main:product_management"))
+        else:
+            print("forms is invalid")
+            print(form)
+    else:
+        form = GProductForm(instance=product)
+    return render(request, 'product_update.html', {'form': form})
+
+
+def product_delete(request, pk):
+    product = get_object_or_404(GProduct, pk=pk)
+    product.delete()
+    return render(redirect(reverse('main:product_management')))
+
+
+# ---------------------------------------------------------
 class StoreView(ListView):
     model = Store
     template_name = 'store.html'
@@ -111,13 +157,12 @@ def pick_out(request, pk):
 
 
 def farm_detail(request):
-    detail = Farm.objects.get(id=1)
-    return render(request, 'farm.html', {'farm': detail})
+    return render(request, 'farm.html', )
 
 
 def product_dashboard(request):
-    product = Product.objects.all()
-    category = Category.objects.all()
+    product = GProduct.objects.all()
+    category = GProductCategory.objects.all()
     try:
         cart = Order.objects.all()[0].product.all()
     except AttributeError:
@@ -129,7 +174,7 @@ def product_dashboard(request):
 
 
 def add_to_cart(request, pk):
-    product = Product.objects.get(pk=pk)
+    product = GProduct.objects.get(pk=pk)
     try:
         order = Order.objects.all()[0]
     except IndexError:
@@ -145,7 +190,7 @@ def add_to_cart(request, pk):
 
 
 def remove_from_cart(request, pk):
-    product = Product.objects.get(pk=pk)
+    product = GProduct.objects.get(pk=pk)
     order = Order.objects.all()[0]
     if product in order.product.all():
         order.product.remove(product)
@@ -167,25 +212,25 @@ def checkout(request):
     for i in order.product.all():
         total_price += i.price
     if request.method == 'POST':
-        print(request.POST)
         name = request.POST.get('name')
         contact = request.POST.get('contact')
-        quantity = request.POST.get('quantity')
         payment = request.POST.get('payment')
-        ref_code = 123456
-        # for item in order.product.all():
-        #     if item.name in request.POST:
-        #         print(item, request.POST.get(item.name))
-        #         InvoiceProduct.objects.create(name=item.name, quantity=request.POST.get(item.name), ref=ref_code)
-        #     else:
-        #         pass
+        ref_code = generate_ref()
+        for item in order.product.all():
+            if item.name in request.POST:
+                InvoiceProduct.objects.create(name=item.name,
+                                              quantity=request.POST.get(item.name),
+                                              ref=ref_code, price=item.price)
+            else:
+                print("no item in request")
         purchase_item = InvoiceProduct.objects.filter(ref=ref_code)
         if purchase_item:
-            # obj = Invoice(ref=ref_code, customer=name, contact=contact, payment=payment)
-            # obj.save()
-            # obj.goods.add(*purchase_item)
-            # obj.save()
+            obj = Invoice(ref=ref_code, customer=name, contact=contact, payment=payment)
+            obj.save()
+            obj.goods.add(*purchase_item)
+            obj.save()
             messages.success(request, "Record saved successfully")
+            order.delete()
             return redirect(f'/invoice/{ref_code}')
 
     else:
@@ -194,19 +239,7 @@ def checkout(request):
     return render(request, 'checkout.html', context)
 
 
-def product_add(request):
-    return render(request, 'product_')
-
-
-def product_update(request):
-    return render(request, 'product_')
-
-
-def product_delete(request):
-    return render(request, 'product_')
-
-
-def invoice(request, ref):
+def single_invoice(request, ref):
     obj = Invoice.objects.get(ref=ref)
     context = {'obj': obj}
     return render(request, 'single_invoice.html', context)
@@ -214,5 +247,5 @@ def invoice(request, ref):
 
 def all_invoice(request):
     obj = Invoice.objects.all()
-    context = {'obj': obj}
+    context = {'invoices': obj}
     return render(request, 'invoices.html', context)
