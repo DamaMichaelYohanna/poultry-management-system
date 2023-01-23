@@ -37,27 +37,29 @@ class Store(models.Model):
         return self.quantity * self.rate
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=20)
-
-    def __str__(self):
-        return self.name
-
-
-class Product(models.Model):
-    name = models.CharField(max_length=20)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    price = models.PositiveIntegerField()
-    quantity = models.PositiveIntegerField()
-    image = models.ImageField(null=True)
+# model for general goods in the farm
+class GProductCategory(models.Model):
+    """model for general product category """
+    name = models.CharField(max_length=30)
+    code = models.CharField(max_length=100)
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.name}'
 
 
+class GProduct(models.Model):
+    """model for general product"""
+    name = models.CharField(max_length=20)
+    category = models.ForeignKey(GProductCategory, on_delete=models.CASCADE)
+    price = models.PositiveIntegerField()
+    image = models.ImageField(null=True)
+    date = models.DateField(auto_now_add=True)
+
+
 class Order(models.Model):
     """model for product to have been added to cart"""
-    product = models.ManyToManyField(Product)
+    product = models.ManyToManyField(GProduct)
     date = models.DateTimeField(auto_now=True)
 
 
@@ -66,8 +68,8 @@ class InvoiceProduct(models.Model):
     name = models.CharField(max_length=20)
     quantity = models.PositiveIntegerField()
     price = models.PositiveIntegerField(default=0)
-    ref = models.PositiveIntegerField()
-    date = models.DateTimeField(auto_now_add=True, null=True)
+    ref = models.CharField(max_length=12)
+    date = models.DateField(auto_now_add=True, null=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -78,7 +80,7 @@ class InvoiceProduct(models.Model):
 
 class Invoice(models.Model):
     """model for the various invoices"""
-    ref = models.PositiveIntegerField()
+    ref = models.CharField(max_length=12)
     customer = models.CharField(max_length=20)
     contact = models.CharField(max_length=12)
     payment = models.CharField(max_length=10, default='cash')
@@ -87,24 +89,3 @@ class Invoice(models.Model):
 
     def __str__(self):
         return str(self.ref)
-
-
-# model for general goods in the farm
-
-class GProduct(models.Model):
-    """model for general product"""
-    name = models.CharField(max_length=20)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    price = models.PositiveIntegerField()
-    image = models.ImageField(null=True)
-    date = models.DateTimeField(auto_now_add=True)
-
-
-class GProductCategory(models.Model):
-    """model for general product category """
-    name = models.CharField(max_length=30)
-    code = models.CharField(max_length=100)
-    date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{self.name}'
