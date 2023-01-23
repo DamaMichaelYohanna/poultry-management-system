@@ -13,8 +13,7 @@ urlpatterns = [
     #     urls for for sales products
     path('product/dashboard', views.product_dashboard,
          name='product_dashboard'),
-    path('product/add', views.product_add, name='product add'),
-    path('product/update', views.product_update, name='product update'),
+    path('product/update/<int:pk>', views.product_update, name='product update'),
     path('product/delete/<int:pk>', views.product_delete,
          name='product delete'),
     path('product/add_to_cart/<int:pk>', views.add_to_cart, name='add to cart'),
@@ -23,8 +22,8 @@ urlpatterns = [
     path("product/clear_cart", views.clear_cart, name="clear cart"),
     path('product/checkout', views.checkout, name='checkout'),
     #     url for invoice
-    path("invoice/<int:ref>", views.invoice, name='invoice'),
-    path("invoice/all", views.all_invoice, name='all_invoice'),
+    path("invoice/<str:ref>", views.single_invoice, name='invoice'),
+    path("invoices", views.all_invoice, name='all_invoice'),
     #     urls for storage products
     path('product/management/category', views.category_management,
          name='category_management'),
