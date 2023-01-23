@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% load static %} {% block title %}PMS | Store Items
 {% endblock %} {%block content %}
 <div class="container-fluid pt-5">
+  {% if invoices %}
   <h2>Generated Invoices</h2>
   <hr />
   <table class="table">
@@ -13,7 +14,7 @@
       <th>Payment Date</th>
       <th>Action</th>
     </tr>
-    {% for invoice in obj %}
+    {% for invoice in invoices %}
     <tr>
       <td>{{forloop.counter}}</td>
       <td>{{invoice.ref}}</td>
@@ -29,5 +30,12 @@
     </tr>
     {% endfor %}
   </table>
+  {% else %}
+  <div style="text-align: center">
+    <img src="{% static 'emp1.jpg' %}" alt="No record found" />
+    <hr />
+    <h3>No Invoice Generated Yet</h3>
+  </div>
+  {% endif %}
 </div>
 {% endblock content %}
