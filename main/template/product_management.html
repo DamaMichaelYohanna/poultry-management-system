@@ -1,10 +1,10 @@
 {% extends 'base.html' %}{% load static %} {% block title %} Product Category
 {%endblock %} {%block content %}
 <div class="container-fluid pt-5">
-  <h2 class="pt-4">Register New Category</h2>
+  <h2 class="pt-4">Register New Products</h2>
   <hr />
   <div>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="col-md-6">
           <p>
@@ -17,7 +17,7 @@
             >
               <option value="" selected>---------</option>
               {% for option in cat %}
-              <option value="{{option.pk}}">{{option.name}}</option>
+              <option value="{{forloop.counter}}">{{option.name}}</option>
               {% endfor %}
             </select>
           </p>
@@ -61,7 +61,7 @@
       </div>
 
       {% csrf_token %}
-      <button class="btn btn-success">Add Category</button>
+      <button class="btn btn-success">Add Product</button>
     </form>
   </div>
   <div class="pt-5">
@@ -82,7 +82,15 @@
         <td>{{prod.category}}</td>
         <td>{{prod.price}}</td>
         <td>{{prod.date}}</td>
-        <td><a href="http://">Delete</a></td>
+        <td>
+          <a href="/product/update/{{prod.pk}}" class="btn btn-primary"
+            >Update</a
+          >
+          |
+          <a href="/product/delete/{{prod.pk}}" class="btn btn-danger"
+            >Delete</a
+          >
+        </td>
       </tr>
       {% endfor %}
     </table>
